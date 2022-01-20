@@ -2,7 +2,7 @@ import useFormulario from './hooks/useFormulario';
 import Input from './components/Input';
 
 function App() {
-  const [formulario, handleChanges] = useFormulario({nombre:''});
+  const [formulario, handleChanges] = useFormulario({nombre:'', apellido:''});
   console.log(formulario);
   return (
     <form>

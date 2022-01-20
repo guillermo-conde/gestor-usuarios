@@ -1,61 +1,36 @@
-import useFormulario from './hooks/useFormulario';
-import Input from './components/Input';
 import Card from './components/Card';
 import Container from './components/Container';
-import Button from './components/Button';
+import UserForm from './components/UserForm';
 import { useState } from 'react';
 
 function App() {
   const [usuarios, setUsuarios] = useState([])
-  const [formulario, handleChanges, reset] = useFormulario({nombre:'', apellido:'', mail:''});
   
-  const submit = e =>{
-    e.preventDefault();
+  const submit = usuario =>{ 
     setUsuarios([
       ...usuarios,
-      formulario
+      usuario
     ])
-    reset();
   }
 
-  console.log(formulario, usuarios);
   return (
-    <Container>
-      <Card>
-        <div style={{padding:20}}>
-          <form onSubmit={submit}>
-            <Input label='Nombre' 
-              name='nombre' 
-              value={formulario.nombre} 
-              onChange={handleChanges} 
-              placeholder='Nombre'/>
+    <div style={{ marginTop: '10%' }}>
+      <Container>
+        <Card>
+          <div style={{padding:20}}>
+            <UserForm submit={submit}/>
+          </div>
+        </Card>
 
-            <Input label='Apellido'   
-              name='apellido' 
-              value={formulario.apellido} 
-              onChange={handleChanges} 
-              placeholder='apellido'/>
-
-            <Input label='E-mail'   
-              name='mail' 
-              value={formulario.mail} 
-              onChange={handleChanges} 
-              placeholder='mail'/>
-            
-            <Button>Enviar</Button>
-          </form>
-        </div>
-      </Card>
-
-      <Card>
-        <ul>
-          {usuarios.map(x =>
-            <li key={x.email}>{`${x.nombre} ${x.apellido}: ${x.mail}`}</li>  
-          )}
-        </ul>
-      </Card>
-    </Container>
-    
+        <Card>
+          <ul>
+            {usuarios.map(x =>
+              <li key={x.mail}>{`${x.nombre} ${x.apellido}: ${x.mail}`}</li>  
+            )}
+          </ul>
+        </Card>
+      </Container>
+    </div>
   );
 }
 
